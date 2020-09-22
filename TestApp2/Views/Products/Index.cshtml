@@ -1,0 +1,30 @@
+﻿@model IEnumerable<TestApp2.Models.Product>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index Products</h2>
+@Html.ActionLink("Create a new Product", "Create")
+<h1>
+    
+        <center><img src="https://png.pngtree.com/thumb_back/fw800/back_our/20190625/ourmid/pngtree-school-courseware-student-blackboard-banner-image_258202.jpg" alt="Work Tools"</center>
+</h1>
+<table class="table table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Delete</th>
+        <th>Edit</th>
+    </tr>
+    @foreach (var product in Model)
+    {
+<tr>
+    <td>@product.Id</td>
+    <td>@product.Name</td>
+    <td>@product.Price</td>
+    <td>@Html.ActionLink("Delete this product", "Delete", new { id = product.Id })</td>
+    <td>@Html.ActionLink("Edit this product", "Edit", new { id = product.Id })</td>
+</tr>
+    }
+</table>

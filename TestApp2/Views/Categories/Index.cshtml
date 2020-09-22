@@ -1,0 +1,28 @@
+﻿@model IEnumerable<TestApp2.Models.Category>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index Categories</h2>
+@Html.ActionLink("Create a new Category", "Create")
+<h1>
+
+    <center><img src="https://png.pngtree.com/thumb_back/fw800/back_our/20190625/ourmid/pngtree-school-courseware-student-blackboard-banner-image_258202.jpg" alt="Work Tools"</center>
+</h1>
+<table class="table table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Category Name</th>
+        <th>Delete</th>
+        <th>Edit</th>
+    </tr>
+    @foreach (var category in Model)
+    {
+        <tr>
+            <td>@category.Id</td>
+            <td>@category.Name</td>
+            <td>@Html.ActionLink("Delete this category", "Delete", new { id = category.Id })</td>
+            <td>@Html.ActionLink("Edit this category", "Edit", new { id = category.Id })</td>
+        </tr>
+    }
+</table>
