@@ -1,4 +1,4 @@
-﻿@model TestApp2.Models.Product
+﻿@model TestApp2.ViewModels.ProductCategoryViewModel
 @{
     ViewBag.Title = "Create";
 }
@@ -10,15 +10,22 @@
 @using (Html.BeginForm("Create", "Products", FormMethod.Post))
 {
     <div class="form-group">
-        @Html.LabelFor(p => p.Name)
-        @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.Name, "", new { @class = "text-danger" })
+        @Html.LabelFor(p => p.Product.Name)
+        @Html.TextBoxFor(p => p.Product.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Product.Name, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(p => p.Price)
-        @Html.TextBoxFor(p => p.Price, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.Price, "", new { @class = "text-danger" })
+        @Html.LabelFor(p => p.Product.Price)
+        @Html.TextBoxFor(p => p.Product.Price, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.Product.Price, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(p => p.Product.Category.Name)
+        @Html.DropDownListFor(p => p.Product.CategoryId,
+         new SelectList(Model.Categories, "Id", "Name"),
+         "Select Category Name",
+         new { @class = "form-control" })
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
- }
+}
 

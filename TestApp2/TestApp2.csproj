@@ -183,6 +183,10 @@
     <Compile Include="Migrations\202009210440511_AddCategoryTable.Designer.cs">
       <DependentUpon>202009210440511_AddCategoryTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009240057440_AddCategoryIdToProductTable.cs" />
+    <Compile Include="Migrations\202009240057440_AddCategoryIdToProductTable.Designer.cs">
+      <DependentUpon>202009240057440_AddCategoryIdToProductTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -192,6 +196,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ProductCategoryViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -278,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009210440511_AddCategoryTable.resx">
       <DependentUpon>202009210440511_AddCategoryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009240057440_AddCategoryIdToProductTable.resx">
+      <DependentUpon>202009240057440_AddCategoryIdToProductTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using TestApp2.Models;
+using System.Data.Entity;
+using TestApp2.ViewModels;
+using System;
 
 namespace TestApp2.Controllers
 {
@@ -16,16 +19,29 @@ namespace TestApp2.Controllers
 
 		// GET: Products
 		[HttpGet]
-		public ActionResult Index()
+		public ActionResult Index(string searchString)
 		{
-			var products = _context.Products.ToList();
-			return View(products);
+			var products = _context.Products
+			.Include(p => p.Category);
+
+			if (!String.IsNullOrEmpty(searchString))
+			{
+				products = products.Where(
+					s => s.Name.Contains(searchString) ||
+					s.Category.Name.Contains(searchString));
+			}
+
+			return View(products.ToList());
 		}
 
 		[HttpGet]
 		public ActionResult Create()
 		{
-			return View();
+			var viewModel = new ProductCategoryViewModel
+			{
+				Categories = _context.Categories.ToList()
+			};
+			return View(viewModel);
 		}
 
 		[HttpPost]
@@ -45,7 +61,8 @@ namespace TestApp2.Controllers
 			var newProduct = new Product
 			{
 				Name = product.Name,
-				Price = product.Price
+				Price = product.Price,
+				CategoryId = product.CategoryId
 			};
 
 			_context.Products.Add(newProduct);
@@ -80,7 +97,13 @@ namespace TestApp2.Controllers
 				return HttpNotFound();
 			}
 
-			return View(productInDb);
+			var viewModel = new ProductCategoryViewModel
+			{
+				Product = productInDb,
+				Categories = _context.Categories.ToList()
+			};
+
+			return View(viewModel);
 		}
 
 		[HttpPost]
@@ -100,6 +123,7 @@ namespace TestApp2.Controllers
 
 			productInDb.Name = product.Name;
 			productInDb.Price = product.Price;
+			productInDb.CategoryId = product.CategoryId;
 			_context.SaveChanges();
 
 			return RedirectToAction("Index");
